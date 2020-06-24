@@ -23,6 +23,7 @@ class GithubPresenter(override val view: GithubContract.View,
     override fun getUserInfo(username: String) {
         getUserInfoUsecase.getUserInfo(username).subscribe({
             userRepoInfoList.add(UserRepoInfoVO(it.avatar_url, it.name, null , null, null, ViewType.userInfo))
+            view.setRepoInfo()
         }, {
             Timber.e(it.localizedMessage)
         })
@@ -36,12 +37,13 @@ class GithubPresenter(override val view: GithubContract.View,
             for( repoInfo in it) {
                 tempList.add(UserRepoInfoVO(null, null, repoInfo.name, repoInfo.description, repoInfo.stargazers_count, ViewType.repoInfo))
             }
+            val sortedList = tempList.sortedWith(compareByDescending{content -> content.starCount}) //star순으로 내림차순 정렬
+            userRepoInfoList.addAll(sortedList)
+            view.setView(userRepoInfoList)
         }, {
             Timber.e(it.localizedMessage)
         })
-        tempList.sortedWith(compareByDescending{it.starCount})
-        userRepoInfoList.addAll(tempList)
-        view.setView(userRepoInfoList)
+
     }
 
 }

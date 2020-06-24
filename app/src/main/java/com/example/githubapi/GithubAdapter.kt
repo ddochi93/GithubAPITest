@@ -32,9 +32,9 @@ class GithubAdapter(private val myDataList: ArrayList<UserRepoInfoVO>) : Recycle
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         if (viewHolder is UserInfoViewHolder) {
-            viewHolder.bind(myDataList[position].ownerName, myDataList[position].avatarUrl)
+            viewHolder.run { bind(myDataList[position].ownerName, myDataList[position].avatarUrl) }
         } else if (viewHolder is RepoInfoViewHolder) {
-            viewHolder.bind(myDataList[position].repoName, myDataList[position].repoDesc, myDataList[position].starCount)
+            viewHolder.run { bind(myDataList[position].repoName, myDataList[position].repoDesc, myDataList[position].starCount) }
         }
     }
 

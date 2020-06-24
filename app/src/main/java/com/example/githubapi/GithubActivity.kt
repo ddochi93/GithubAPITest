@@ -11,7 +11,7 @@ import org.koin.android.ext.android.get
 class GithubActivity : AppCompatActivity(), GithubContract.View {
     private lateinit var binding: ActivityGithubBinding
     private lateinit var presenter: GithubPresenter
-    private lateinit var adapter: GithubAdapter
+    private lateinit var githubAdapter: GithubAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +30,17 @@ class GithubActivity : AppCompatActivity(), GithubContract.View {
 
     private fun initView() {
         presenter.getUserInfo("ddochi93")
-        presenter.getUserRepoList("ddochi93")
+    }
 
+    override fun setRepoInfo() {
+        presenter.getUserRepoList("ddochi93")
     }
 
     override fun setView(userRepoInfoList: ArrayList<UserRepoInfoVO>) {
-        adapter = GithubAdapter(userRepoInfoList)
+        githubAdapter = GithubAdapter(userRepoInfoList)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = this.adapter
+            adapter = githubAdapter
 
         }
     }

@@ -7,6 +7,7 @@ import com.example.githubapi.data.entity.UserRepoInfoVO
 interface GithubContract {
     interface View {
         fun setView(userRepoInfoList: ArrayList<UserRepoInfoVO>)
+        fun setRepoInfo()
     }
 
     interface Presenter {
