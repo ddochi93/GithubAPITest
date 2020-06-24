@@ -13,7 +13,7 @@ class GetUserRepoInfoUsecase(accessRetrofitRepository: AccessRetrofitRepository)
         .getAccessRetrofit()
         .create(UserInfoService::class.java)
 
-    fun getUserRepoInfo(username: String) : Single<UserRepoInfoResponse> = userInfoService
+    fun getUserRepoInfo(username: String) : Single<List<UserRepoInfoResponse>> = userInfoService
         .getUserRepoInfo(username)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

@@ -2,19 +2,17 @@ package com.example.githubapi
 
 import com.example.githubapi.api.usecase.GetUserInfoUsecase
 import com.example.githubapi.api.usecase.GetUserRepoInfoUsecase
+import com.example.githubapi.data.entity.UserRepoInfoVO
 
 interface GithubContract {
     interface View {
-        fun setUserInfo()
-        fun setUserRepoList()
+        fun setView(userRepoInfoList: ArrayList<UserRepoInfoVO>)
     }
 
     interface Presenter {
         val view: View
-        val getUserInfoUsecase: GetUserInfoUsecase
-        val getUserRepoInfoUsecase: GetUserRepoInfoUsecase
 
-        fun getUserInfo()
-        fun getUserRepoList()
+        fun getUserInfo(username:String)
+        fun getUserRepoList(username:String)
     }
 }

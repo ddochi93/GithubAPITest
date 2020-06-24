@@ -13,5 +13,5 @@ interface UserInfoService {
     fun getUserInfo(@Path("username") username: String): Single<UserInfoResponse>
 
     @GET("{username}/repos")
-    fun getUserRepoInfo(@Path("username") username: String): Single<UserRepoInfoResponse>
+    fun getUserRepoInfo(@Path("username") username: String): Single<List<UserRepoInfoResponse>>
 }
