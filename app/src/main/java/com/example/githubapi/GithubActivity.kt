@@ -1,5 +1,6 @@
 package com.example.githubapi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ class GithubActivity : AppCompatActivity(), GithubContract.View {
     private lateinit var binding: ActivityGithubBinding
     private lateinit var presenter: GithubPresenter
     private lateinit var githubAdapter: GithubAdapter
+    private var username: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +32,15 @@ class GithubActivity : AppCompatActivity(), GithubContract.View {
     }
 
     private fun initView() {
-        presenter.getUserInfo(intent.getStringExtra(Consts.USER_NAME))
+        if (Intent.ACTION_VIEW == intent.action) {
+            val uri = intent.data
+            username = uri?.path?.replace("/","")
+        }
+        presenter.getUserInfo(username!!)
     }
 
     override fun setRepoInfo() {
-        presenter.getUserRepoList(intent.getStringExtra(Consts.USER_NAME))
+        presenter.getUserRepoList(username!!)
     }
 
     override fun setView(userRepoInfoList: ArrayList<UserRepoInfoVO>) {
