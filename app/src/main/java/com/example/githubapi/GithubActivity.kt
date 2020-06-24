@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubapi.data.entity.UserRepoInfoVO
 import com.example.githubapi.databinding.ActivityGithubBinding
+import com.example.githubapi.globalconst.Consts
 import org.koin.android.ext.android.get
 
 class GithubActivity : AppCompatActivity(), GithubContract.View {
@@ -29,11 +30,11 @@ class GithubActivity : AppCompatActivity(), GithubContract.View {
     }
 
     private fun initView() {
-        presenter.getUserInfo("ddochi93")
+        presenter.getUserInfo(intent.getStringExtra(Consts.USER_NAME))
     }
 
     override fun setRepoInfo() {
-        presenter.getUserRepoList("ddochi93")
+        presenter.getUserRepoList(intent.getStringExtra(Consts.USER_NAME))
     }
 
     override fun setView(userRepoInfoList: ArrayList<UserRepoInfoVO>) {
