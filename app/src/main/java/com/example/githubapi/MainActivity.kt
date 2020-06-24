@@ -1,6 +1,7 @@
 package com.example.githubapi
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,8 +24,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buttonClicked() {
-        startActivity(Intent(this, GithubActivity::class.java).apply {
-            putExtra(Consts.USER_NAME, mainBinding.insertAppLink.text.toString().trim() )
-        })
+        val url = mainBinding.appLink.text.toString()
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent);
+
     }
 }
